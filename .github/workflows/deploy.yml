@@ -16,11 +16,10 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-  cd ~/source-html-webpage
-  git pull origin main
-  if [ -f ~/server.pid ]; then kill $(cat ~/server.pid) 2>/dev/null || true; fi
-  cd docs
-  setsid nohup python3 -m http.server 8000 > /dev/null 2>&1 < /dev/null &
-  echo $! > ~/server.pid
-  disown
-            
+            cd ~/source-html-webpage
+            git pull origin main
+            if [ -f ~/server.pid ]; then kill $(cat ~/server.pid) 2>/dev/null || true; fi
+            cd docs
+            setsid nohup python3 -m http.server 8000 > /dev/null 2>&1 < /dev/null &
+            echo $! > ~/server.pid
+            disown
